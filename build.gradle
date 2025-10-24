@@ -21,7 +21,22 @@ repositories {
 	maven {
 		url 'https://maven.nucleoid.xyz'
 	}
+
+    // Uncomment if using Rosemary or some other Modrinth dependency
+    //exclusiveContent {
+    //    forRepository {
+    //        maven {
+    //            name = "Modrinth"
+    //            url = "https://api.modrinth.com/maven"
+    //        }
+    //    }
+
+    //    filter {
+    //        includeGroup "maven.modrinth"
+    //    }
+    //}
 }
+
 
 fabricApi {
 	configureDataGeneration {
@@ -41,11 +56,16 @@ dependencies {
 	// Polymer
 	modImplementation include("eu.pb4:polymer-core:${project.polymer_version}")
 
-	// SGUI, you probably want this for UI but it depends on your use case
+    // Server-Translations
+    modImplementation include("xyz.nucleoid:server-translations-api:${project.server_translations_version}")
+
+	// SGUI, you might want this for UI but it depends on your use case
 	// modImplementation include("eu.pb4:sgui:${project.sgui_version}")
 
-	// Server-Translations
-	modImplementation include("xyz.nucleoid:server-translations-api:${project.server_translations_version}")
+    // Rosemary, my server-side library.
+    // It adds some helpful things like simple configuration and dialog utils, but no need to use if you don't want to.
+    // Make sure to add rosemarylib to your dependencies and uncomment the Modrinth repository if you are using it.
+    // modImplementation "maven.modrinth:rosemarylib:${project.rosemary_version}"
 }
 
 processResources {
